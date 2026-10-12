@@ -1,0 +1,197 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(rgba(255,190,210,.76), rgba(255,220,230,.88)), url("heart-bg.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.screen { position: fixed; inset: 0; display: none; width: 100%; height: 100%; align-items: center; justify-content: center; }
+.screen.active { display: flex; }
+
+.envelope-container { position: relative; width: 420px; max-width: 85vw; cursor: pointer; text-align: center; transition: transform .3s ease; }
+.envelope-container:hover { transform: scale(1.05); }
+.envelope { width: 100%; display: block; filter: drop-shadow(0 15px 20px rgba(0,0,0,.22)); }
+.cat-heart { position: absolute; width: 110px; right: -45px; bottom: 5px; transform: rotate(8deg); }
+.click-text { margin-top: 20px; font-size: 20px; color: #8b2942; font-weight: bold; animation: pulse 1.5s infinite; }
+
+@keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+
+#question-screen { background: linear-gradient(rgba(255,190,210,.80), rgba(255,225,235,.92)), url("heart-bg.jpg"); background-size: cover; }
+.card { width: 600px; max-width: 90vw; min-height: 430px; padding: 50px 30px; display:flex; flex-direction:column; align-items:center; justify-content:center; background:rgba(255,255,255,.93); border-radius:30px; box-shadow:0 20px 60px rgba(0,0,0,.25); animation:cardAppear .8s ease; }
+@keyframes cardAppear { from { opacity:0; transform:scale(.7) translateY(30px); } to { opacity:1; transform:scale(1) translateY(0); } }
+.question-cat { width:130px; margin-bottom:20px; }
+.card h1 { color:#8b2942; font-size:42px; text-align:center; margin-bottom:40px; }
+.buttons { display:flex; gap:25px; align-items:center; justify-content:center; }
+.buttons button { border:none; padding:18px 38px; border-radius:50px; font-size:22px; font-weight:bold; cursor:pointer; transition:transform .2s ease, box-shadow .2s ease; }
+.buttons button:hover { transform:scale(1.1); box-shadow:0 8px 20px rgba(0,0,0,.2); }
+.yes { background:#ff4f7b; color:white; }
+.no { background:#eee; color:#555; }
+
+#gallery-screen { position:relative; overflow:hidden; background:radial-gradient(circle at center,rgba(255,190,215,.42),rgba(80,20,50,.95)); }
+.birthday-message { position:absolute; z-index:20; left:50%; top:50%; transform:translate(-50%,-50%); text-align:center; pointer-events:none; width:90%; }
+.birthday-message h1 { color:white; font-size:clamp(40px,7vw,90px); text-shadow:0 5px 20px rgba(0,0,0,.5); animation:messageAppear 2s ease; }
+.birthday-message h2 { margin-top:10px; color:#ffb5cd; font-size:clamp(30px,5vw,65px); text-shadow:0 5px 20px rgba(0,0,0,.5); }
+@keyframes messageAppear { from { opacity:0; transform:scale(.5); } to { opacity:1; transform:scale(1); } }
+
+#gallery-screen.panning { cursor:grabbing; }
+.birthday-message { position:absolute; z-index:20; left:50%; top:50%; transform:translate(-50%,-50%); text-align:center; pointer-events:none; width:90%; }
+.birthday-message h1 { color:white; font-size:clamp(40px,7vw,90px); text-shadow:0 5px 20px rgba(0,0,0,.5); animation:messageAppear 2s ease; }
+.birthday-message h2 { margin-top:10px; color:#ffb5cd; font-size:clamp(30px,5vw,65px); text-shadow:0 5px 20px rgba(0,0,0,.5); }
+@keyframes messageAppear { from { opacity:0; transform:scale(.5); } to { opacity:1; transform:scale(1); } }
+
+/* Grand espace que l'on peut explorer en faisant glisser la souris / le doigt */
+#gallery {
+  position:absolute;
+  left:0;
+  top:0;
+  width:2500px;
+  height:2200px;
+  opacity:0;
+  transition:opacity 2s ease;
+  pointer-events:none;
+  will-change:transform;
+}
+#gallery.visible { opacity:1; pointer-events:auto; }
+
+.photo {
+  position:absolute;
+  width:150px;
+  height:190px;
+  padding:8px;
+  background:white;
+  border-radius:8px;
+  box-shadow:0 15px 35px rgba(0,0,0,.4);
+  cursor:pointer;
+  user-select:none;
+  touch-action:auto;
+}
+.photo:hover { z-index:50; box-shadow:0 25px 50px rgba(0,0,0,.5); }
+.photo img { width:100%; height:100%; object-fit:cover; border-radius:4px; display:block; pointer-events:none; }
+.photo1 { left:140px; top:140px; --rotation:-12deg; transform:rotate(-12deg); }
+.photo2 { left:1540px; top:150px; --rotation:10deg; transform:rotate(10deg); }
+.photo3 { left:220px; top:870px; --rotation:8deg; transform:rotate(8deg); }
+.photo4 { left:1430px; top:860px; --rotation:-9deg; transform:rotate(-9deg); }
+.photo5 { left:900px; top:120px; --rotation:4deg; transform:rotate(4deg); }
+
+/* Six nouvelles photos ajoutées à la galerie */
+.photo6 { left:500px; top:500px; --rotation:-7deg; transform:rotate(-7deg); }
+.photo7 { left:1900px; top:420px; --rotation:11deg; transform:rotate(11deg); }
+.photo8 { left:1150px; top:800px; --rotation:-5deg; transform:rotate(-5deg); }
+.photo9 { left:650px; top:1300px; --rotation:7deg; transform:rotate(7deg); }
+.photo10 { left:2050px; top:1200px; --rotation:-10deg; transform:rotate(-10deg); }
+.photo11 { left:1300px; top:1450px; --rotation:5deg; transform:rotate(5deg); }
+
+/* Six photos supplémentaires : elles restent petites et réparties dans l'espace */
+.photo12 { left:350px; top:300px; --rotation:6deg; transform:rotate(6deg); }
+.photo13 { left:1050px; top:520px; --rotation:-8deg; transform:rotate(-8deg); }
+.photo14 { left:2100px; top:180px; --rotation:9deg; transform:rotate(9deg); }
+.photo15 { left:1750px; top:1050px; --rotation:-4deg; transform:rotate(-4deg); }
+.photo16 { left:900px; top:1750px; --rotation:7deg; transform:rotate(7deg); }
+.photo17 { left:2150px; top:1750px; --rotation:-7deg; transform:rotate(-7deg); }
+@keyframes floating { 0%,100% { margin-top:0; } 50% { margin-top:-20px; } }
+
+.cat-dance { position:absolute; width:120px; right:20px; bottom:15px; z-index:30; }
+#hearts-container { position:absolute; inset:0; overflow:hidden; z-index:100; pointer-events:none; }
+.heart { position:absolute; bottom:-50px; font-size:30px; animation:heartUp 3s linear forwards; }
+@keyframes heartUp { 0% { transform:translateY(0) rotate(0deg) scale(.5); opacity:0; } 15% { opacity:1; } 100% { transform:translateY(-110vh) rotate(360deg) scale(1.5); opacity:0; } }
+
+@media (max-width:700px) {
+  .envelope-container { width:320px; }
+  .cat-heart { width:80px; right:-25px; }
+  .card { min-height:380px; }
+  .card h1 { font-size:30px; }
+  .buttons { gap:12px; }
+  .buttons button { padding:15px 25px; font-size:18px; }
+  .photo { width:120px; height:155px; }
+  .cat-dance { width:80px; }
+}
+
+
+/* Photos compactes : plus de place pour en ajouter facilement */
+.photo {
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.photo:hover {
+  transform: rotate(var(--rotation)) scale(1.04);
+}
+
+/* Fenêtre photo agrandie */
+.photo-modal {
+  position:fixed;
+  inset:0;
+  z-index:2000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:30px;
+  background:rgba(0,0,0,.88);
+  cursor:default;
+}
+.photo-modal.visible { display:flex; }
+.photo-modal img {
+  max-width:88vw;
+  max-height:88vh;
+  object-fit:contain;
+  border:8px solid white;
+  border-radius:12px;
+  box-shadow:0 20px 60px rgba(0,0,0,.6);
+  user-select:none;
+}
+.back-photo, .close-photo {
+  position:absolute;
+  top:22px;
+  width:54px;
+  height:54px;
+  border:none;
+  border-radius:50%;
+  background:rgba(255,255,255,.96);
+  color:#8b2942;
+  font-weight:bold;
+  cursor:pointer;
+  z-index:2001;
+  box-shadow:0 8px 25px rgba(0,0,0,.3);
+}
+.back-photo { left:24px; font-size:34px; line-height:50px; }
+.close-photo { right:24px; font-size:38px; line-height:50px; }
+.back-photo:hover, .close-photo:hover { transform:scale(1.08); }
+
+@media (max-width:700px) {
+  #gallery { width:1900px; height:1750px; }
+  .photo { width:105px; height:135px; padding:5px; }
+  .photo1 { left:90px; top:110px; }
+  .photo2 { left:1050px; top:120px; }
+  .photo3 { left:150px; top:680px; }
+  .photo4 { left:980px; top:650px; }
+  .photo5 { left:600px; top:90px; }
+  /* Positions adaptées au téléphone */
+  .photo6 { left:400px; top:400px; }
+  .photo7 { left:1280px; top:350px; }
+  .photo8 { left:800px; top:700px; }
+  .photo9 { left:350px; top:1100px; }
+  .photo10 { left:1250px; top:1050px; }
+  .photo11 { left:800px; top:1180px; }
+
+  .photo12 { left:250px; top:250px; }
+  .photo13 { left:650px; top:420px; }
+  .photo14 { left:1550px; top:180px; }
+  .photo15 { left:1450px; top:900px; }
+  .photo16 { left:500px; top:1450px; }
+  .photo17 { left:1550px; top:1450px; }
+
+  .photo-modal { padding:15px; }
+  .photo-modal img { max-width:94vw; max-height:82vh; }
+  .back-photo, .close-photo { width:46px; height:46px; top:14px; }
+  .back-photo { left:14px; font-size:30px; }
+  .close-photo { right:14px; font-size:32px; }
+}
+
+/* Navigation à la souris : on explore en déplaçant simplement le curseur */
+@media (hover: hover) and (pointer: fine) {
+  #gallery-screen { cursor: crosshair; }
+  #gallery-screen .photo { cursor: zoom-in; }
+}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joyeux anniversaire ❤️</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <section id="envelope-screen" class="screen active">
+    <div class="envelope-container" id="openEnvelope">
+      <img src="envelope.png" class="envelope" alt="Enveloppe">
+      <img src="cat_heart.gif" class="cat-heart" alt="Petit chat">
+      <p class="click-text">Clique sur la lettre 💌</p>
+    </div>
+  </section>
+
+  <section id="question-screen" class="screen">
+    <div class="card">
+      <img src="cat_heart.gif" class="question-cat" alt="Chat avec un cœur">
+      <h1>Est ce que tu m'aime ?</h1>
+      <div class="buttons">
+        <button id="yesButton" class="yes">OUI ❤️</button>
+        <button id="noButton" class="no">NON</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery-screen" class="screen">
+    <div id="hearts-container"></div>
+    <div class="birthday-message">
+      <h1>Joyeux Anniversaire</h1>
+      <h2>mon femme ❤️</h2>
+    </div>
+
+    <div id="gallery">
+      <div class="photo photo1"><img src="photos/photo1.jpg" alt="Souvenir 1"></div>
+      <div class="photo photo2"><img src="photos/photo2.jpg" alt="Souvenir 2"></div>
+      <div class="photo photo3"><img src="photos/photo3.jpg" alt="Souvenir 3"></div>
+      <div class="photo photo4"><img src="photos/photo4.jpg" alt="Souvenir 4"></div>
+      <div class="photo photo5"><img src="photos/photo5.jpg" alt="Souvenir 5"></div>
+      <div class="photo photo6"><img src="photos/photo6.jpg" alt="Souvenir 6"></div>
+      <div class="photo photo7"><img src="photos/photo7.jpg" alt="Souvenir 7"></div>
+      <div class="photo photo8"><img src="photos/photo8.jpg" alt="Souvenir 8"></div>
+      <div class="photo photo9"><img src="photos/photo9.jpg" alt="Souvenir 9"></div>
+      <div class="photo photo10"><img src="photos/photo10.jpg" alt="Souvenir 10"></div>
+      <div class="photo photo11"><img src="photos/photo11.jpg" alt="Souvenir 11"></div>
+      <div class="photo photo12"><img src="photos/photo12.jpg" alt="Souvenir 12"></div>
+      <div class="photo photo13"><img src="photos/photo13.jpg" alt="Souvenir 13"></div>
+      <div class="photo photo14"><img src="photos/photo14.jpg" alt="Souvenir 14"></div>
+      <div class="photo photo15"><img src="photos/photo15.jpg" alt="Souvenir 15"></div>
+      <div class="photo photo16"><img src="photos/photo16.jpg" alt="Souvenir 16"></div>
+      <div class="photo photo17"><img src="photos/photo17.jpg" alt="Souvenir 17"></div>
+    </div>
+
+    <img src="cat_dance.gif" class="cat-dance" alt="Chat qui danse">
+
+    <!-- Fenêtre photo agrandie -->
+    <div id="photo-modal" class="photo-modal" aria-hidden="true">
+      <button id="back-photo" class="back-photo" type="button" aria-label="Retour">←</button>
+      <button id="close-photo" class="close-photo" type="button" aria-label="Fermer">×</button>
+      <img id="expanded-photo" src="" alt="Photo agrandie">
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
